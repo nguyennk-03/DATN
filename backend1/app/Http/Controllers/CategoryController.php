@@ -11,7 +11,7 @@ class CategoryController extends Controller
     //  Lấy danh sách danh mục (Public API)
     public function index()
     {
-        $categories = Category::orderBy('id','esc' )->get();
+        $categories = Category::orderBy('id','asc' )->get();
         return response()->json(['categories' => $categories]);
     }
 

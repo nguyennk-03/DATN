@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;    
+    use HasApiTokens, Notifiable;
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use Notifiable, HasFactory;
     /**
@@ -51,6 +51,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function tokens()
+    {
+        return $this->morphMany(\Laravel\Sanctum\PersonalAccessToken::class, 'tokenable');
+    }
+
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);

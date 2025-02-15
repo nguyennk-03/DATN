@@ -10,7 +10,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    //Đăng ký tài khoản
+    // Đăng ký tài khoản
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -47,7 +47,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-    //Đăng nhập
+    // Đăng nhập
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -74,13 +74,13 @@ class AuthController extends Controller
         ]);
     }
 
-    //Lấy thông tin người dùng
+    // Lấy thông tin người dùng
     public function profile(Request $request)
     {
         return response()->json($request->user()->only(['id', 'name', 'email', 'phone', 'avatar', 'role']));
     }
 
-    //Đăng xuất
+    // Đăng xuất
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
