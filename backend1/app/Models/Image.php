@@ -1,18 +1,13 @@
 <?php
-namespace App\Models\Api;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Image extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'product_id', 'rating', 'comment'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = ['product_id', 'image_url'];
 
     public function product()
     {

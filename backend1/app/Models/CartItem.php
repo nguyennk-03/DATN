@@ -1,13 +1,18 @@
 <?php
-namespace App\Models\Api;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class CartItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id', 'image_url'];
+    protected $fillable = ['user_id', 'product_id', 'quantity'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function product()
     {

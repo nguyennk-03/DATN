@@ -1,13 +1,13 @@
 <?php
-namespace App\Models\Api;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CartItem extends Model
+class Review extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'product_id', 'quantity'];
+    protected $fillable = ['user_id', 'product_id', 'rating', 'comment'];
 
     public function user()
     {

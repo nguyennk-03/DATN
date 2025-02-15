@@ -1,11 +1,11 @@
 <?php
-namespace App\Models\Api;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Size extends Model
+class Color extends Model
 {
     use HasFactory;
-    protected $fillable = ['size'];
+    protected $fillable = ['color_name'];
 }

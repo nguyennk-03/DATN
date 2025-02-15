@@ -20,6 +20,7 @@ class ProductVariantSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) { // Tạo 30 biến thể sản phẩm
             DB::table('product_variants')->insert([
                 'product_id' => $faker->randomElement($productIds),
+                'images_id' => $faker->numberBetween(1, 50), // ID của ảnh từ 1 đến 50
                 'size_id' => $faker->randomElement($sizeIds),
                 'color_id' => $faker->randomElement($colorIds),
                 'stock' => $faker->numberBetween(0, 100), // Số lượng tồn kho từ 0 đến 100

@@ -9,13 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
+
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
-    
+    use HasApiTokens, Notifiable;    
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
+    use Notifiable, HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'avatar',
+        'role'
     ];
 
     /**
@@ -49,5 +51,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-}
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+}
