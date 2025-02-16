@@ -1,38 +1,55 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\ProductResource;
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // Lấy danh sách sản phẩm (Public API)
     public function index()
     {
-        return response()->json(Product::all());
+        $products = Product::with(['category', 'brand', 'images', 'variants'])
+                           ->paginate(10);  // Ensure relationships are loaded
+        return ProductResource::collection($products);
     }
 
-    public function store(Request $request)
+    // Tạo mới sản phẩm (Admin API)
+    public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-        return response()->json($product, 201);
+        $product = Product::create($request->validated());
+        return response()->json([
+            'message' => 'Sản phẩm đã được tạo!',
+            'product' => new ProductResource($product)
+        ], 201);
     }
 
+    // Xem chi tiết sản phẩm (Public API)
     public function show($id)
     {
-        return response()->json(Product::findOrFail($id));
+        $product = Product::with(['category', 'brand', 'images', 'variants'])
+                          ->findOrFail($id);  // Ensure relationships are loaded
+        return new ProductResource($product);
     }
 
-    public function update(Request $request, $id)
+    // Cập nhật sản phẩm (Admin API)
+    public function update(StoreProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
-        $product->update($request->all());
-        return response()->json($product);
+        $product->update($request->validated());
+        return response()->json([
+            'message' => 'Sản phẩm đã được cập nhật!',
+            'product' => new ProductResource($product)
+        ]);
     }
 
+    // Xóa sản phẩm (Admin API)
     public function destroy($id)
     {
-        Product::destroy($id);
-        return response()->json(['message' => 'Deleted successfully']);
+        $product = Product::findOrFail($id);
+        $product->delete();  // Soft delete by default, or use `destroy()` for hard delete
+        return response()->json(['message' => 'Sản phẩm đã được xóa thành công!']);
     }
 }

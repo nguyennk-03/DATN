@@ -1,38 +1,53 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\ProductVariantResource;
 use App\Models\ProductVariant;
+use App\Http\Requests\StoreProductVariantRequest;
 
 class ProductVariantController extends Controller
 {
+    // Lấy danh sách biến thể sản phẩm
     public function index()
     {
-        return response()->json(ProductVariant::all());
+        $variants = ProductVariant::with(['product', 'size', 'color', 'images'])->paginate(10); 
+        return ProductVariantResource::collection($variants);
     }
 
-    public function store(Request $request)
+    // Tạo mới biến thể sản phẩm
+    public function store(StoreProductVariantRequest $request)
     {
-        $variant = ProductVariant::create($request->all());
-        return response()->json($variant, 201);
+        $variant = ProductVariant::create($request->validated());
+        return response()->json([
+            'message' => 'Biến thể sản phẩm đã được tạo!',
+            'variant' => new ProductVariantResource($variant)
+        ], 201);
     }
 
+    // Xem chi tiết biến thể sản phẩm
     public function show($id)
     {
-        return response()->json(ProductVariant::findOrFail($id));
+        $variant = ProductVariant::with(['product', 'size', 'color', 'images'])->findOrFail($id);
+        return new ProductVariantResource($variant);
     }
 
-    public function update(Request $request, $id)
+    // Cập nhật biến thể sản phẩm
+    public function update(StoreProductVariantRequest $request, $id)
     {
         $variant = ProductVariant::findOrFail($id);
-        $variant->update($request->all());
-        return response()->json($variant);
+        $variant->update($request->validated());
+        return response()->json([
+            'message' => 'Biến thể sản phẩm đã được cập nhật!',
+            'variant' => new ProductVariantResource($variant)
+        ]);
     }
 
+    // Xóa biến thể sản phẩm
     public function destroy($id)
     {
-        ProductVariant::destroy($id);
-        return response()->json(['message' => 'Deleted successfully']);
+        $variant = ProductVariant::findOrFail($id);
+        $variant->delete();
+        return response()->json(['message' => 'Biến thể sản phẩm đã được xóa thành công!']);
     }
 }

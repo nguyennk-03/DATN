@@ -4,28 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CartItem;
+use App\Http\Requests\StoreCartItemRequest;
+use App\Http\Resources\CartItemResource;
 
 class CartItemController extends Controller
 {
+    // Get all cart items
     public function index()
     {
-        return response()->json(CartItem::all());
+        $cartItems = CartItem::paginate(10); // Adding pagination to handle large datasets
+        return CartItemResource::collection($cartItems);
     }
 
-    public function store(Request $request)
+    // Add a new cart item
+    public function store(StoreCartItemRequest $request)
     {
-        $cartItem = CartItem::create($request->all());
-        return response()->json($cartItem, 201);
+        // Validation is handled by StoreCartItemRequest
+        $validated = $request->validated();
+
+        // Create a new cart item
+        $cartItem = CartItem::create($validated);
+        
+        return new CartItemResource($cartItem);
     }
 
+    // Get a single cart item
     public function show($id)
     {
-        return response()->json(CartItem::findOrFail($id));
+        $cartItem = CartItem::findOrFail($id);
+        return new CartItemResource($cartItem);
     }
 
+    // Delete a cart item
     public function destroy($id)
     {
-        CartItem::destroy($id);
-        return response()->json(['message' => 'Deleted successfully']);
+        $cartItem = CartItem::findOrFail($id);
+        $cartItem->delete();
+        
+        return response()->json(['message' => 'Cart item deleted successfully']);
     }
 }
