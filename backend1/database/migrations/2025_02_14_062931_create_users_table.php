@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone')->unique()->nullable();
             $table->string('avatar')->nullable();
-            $table->enum('role', ['admin', 'customer'])->default('customer');
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'phone' => $faker->phoneNumber,
                 'avatar' => $faker->imageUrl(100, 100, 'people'),
-                'role' => $faker->randomElement(['admin', 'customer']),
+                'role' => $faker->randomElement(['admin', 'user']),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
