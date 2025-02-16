@@ -16,9 +16,9 @@ class OrderSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('orders')->insert([
                 'user_id' => $faker->randomElement($userIds),
-                'status' => $faker->randomElement(['Chờ xử lý', 'Đang xử lý', 'Đã giao', 'Hoàn tất', 'Đã hủy']),
+                'status' => $faker->randomElement(['pending', 'processing', 'shipped', 'completed', 'canceled']),
                 'total_price' => $faker->randomFloat(2, 100, 1000),
-                'payment_status' => $faker->randomElement(['Chờ thanh toán', 'Đã thanh toán', 'Thất bại']),
+                'payment_status' => $faker->randomElement(['pending', 'paid', 'failed']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);            

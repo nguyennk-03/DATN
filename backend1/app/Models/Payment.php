@@ -18,4 +18,13 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getStatusTextAttribute()
+    {
+        $statuses = [
+            'pending' => 'Chờ thanh toán',
+            'paid' => 'Đã thanh toán',
+            'failed' => 'Thất bại',
+        ];
+        return $statuses[$this->status] ?? 'Không xác định';
+    }
 }
