@@ -14,7 +14,6 @@ class CreateProductVariantsTable extends Migration
             $table->unsignedBigInteger('images_id');
             $table->unsignedBigInteger('size_id');
             $table->unsignedBigInteger('color_id');
-            $table->integer('stock')->default(0);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

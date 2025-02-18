@@ -18,7 +18,12 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css">
-
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet"  />
+    <link href="{{ asset('css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"  />
+    <link href="{{ asset('css/dropify.min.css') }}" rel="stylesheet"  />
+    <link href="{{ asset('css/jquery-3.6.0.min.css') }}" rel="stylesheet"  />
+    <link href="{{ asset('css/bootstrap.bundle.min.css') }}" rel="stylesheet"  />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"  />
 
 </head>
 
@@ -122,14 +127,14 @@
             </ul>
 
             <div class="logo-box">
-                <a href="index.html" class="logo text-center">
+                <a href="{{ route('admin') }}" class="logo text-center">
                     <span class="logo-lg">
-                        <img src="{{ asset('images/logo-light.png') }}" alt="" height="24">
+                        <img src="{{ asset('images/logo-sm2.png') }}" alt="" height="100">
                         <!-- <span class="logo-lg-text-light">Upvex</span> -->
                     </span>
                     <span class="logo-sm">
                         <!-- <span class="logo-sm-text-dark">X</span> -->
-                        <img src="{{ asset('images/logo-sm.png') }}" alt="" height="28">
+                        <img src="{{ asset('images/logo-sm.png') }}" alt="" height="75">
                     </span>
                 </a>
             </div>
@@ -188,25 +193,25 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('email-inbox.htm') }}">
+                            <a href="{{ route('admin') }}">
                                 <i class="icon-basket-loaded"></i>
                                 <span> Đơn hàng </span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('email-inbox.htm') }}">
+                            <a href="{{ route('admin') }}">
                                 <i class="fe-tag"></i>
                                 <span> Khuyến mãi </span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('email-inbox.htm') }}">
+                            <a href="{{ route('admin') }}">
                                 <i class="icon-speech"></i>
                                 <span> Bình luận </span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('email-inbox.htm') }}">
+                            <a href="{{ route('admin') }}">
                                 <i class="icon-star"></i>
                                 <span> Đánh giá </span>
                             </a>
@@ -331,8 +336,13 @@
 
     <!-- App js -->
     <script src="{{ asset('js/app.min.js') }}"></script>
-
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/dropify.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+
 </body>
 
 </html>

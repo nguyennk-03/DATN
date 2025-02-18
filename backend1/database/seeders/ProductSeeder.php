@@ -23,7 +23,8 @@ class ProductSeeder extends Seeder
                 'name' => ucfirst($name),
                 'slug' => $slug,
                 'description' => $faker->sentence(10),
-                'price' => $faker->randomFloat(2, 10, 500),
+                'price' => $faker->randomFloat(2, 100000, 5000000),
+                'stock' => $faker->numberBetween(1, 100), // Số lượng tồn kho từ 0 đến 100
                 'category_id' => $faker->randomElement($categories),
                 'brand_id' => $faker->randomElement($brands),
                 'created_at' => now(),

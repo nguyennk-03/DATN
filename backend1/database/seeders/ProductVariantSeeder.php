@@ -14,16 +14,16 @@ class ProductVariantSeeder extends Seeder
 
         // Lấy danh sách ID của các sản phẩm, sizes và colors
         $productIds = DB::table('products')->pluck('id')->toArray();
+        $imageIds = DB::table('images')->pluck('id')->toArray();
         $sizeIds = DB::table('sizes')->pluck('id')->toArray();
         $colorIds = DB::table('colors')->pluck('id')->toArray();
 
         for ($i = 1; $i <= 30; $i++) { // Tạo 30 biến thể sản phẩm
             DB::table('product_variants')->insert([
                 'product_id' => $faker->randomElement($productIds),
-                'images_id' => $faker->numberBetween(1, 50), // ID của ảnh từ 1 đến 50
+                'images_id' => $faker->randomElement($imageIds),
                 'size_id' => $faker->randomElement($sizeIds),
                 'color_id' => $faker->randomElement($colorIds),
-                'stock' => $faker->numberBetween(0, 100), // Số lượng tồn kho từ 0 đến 100
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

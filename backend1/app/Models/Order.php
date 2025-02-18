@@ -1,29 +1,37 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\OrderItem;
+use App\Models\Payment;
 
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = ['user_id', 'status', 'total_price', 'payment_status'];
 
+    // Quan hệ với người dùng
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // Quan hệ với các mục đơn hàng
     public function items()
     {
         return $this->hasMany(OrderItem::class);
     }
 
+    // Quan hệ với thanh toán
     public function payments()
     {
         return $this->hasMany(Payment::class);
     }
+
+    // Lấy văn bản trạng thái
     public function getStatusTextAttribute()
     {
         $statuses = [
@@ -36,6 +44,7 @@ class Order extends Model
         return $statuses[$this->status] ?? 'Không xác định';
     }
 
+    // Lấy văn bản trạng thái thanh toán
     public function getPaymentStatusTextAttribute()
     {
         $paymentStatuses = [

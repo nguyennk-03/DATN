@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,18 +9,22 @@ use App\Models\Product;
 class Category extends Model
 {
     use HasFactory;
+
     protected $fillable = ['name', 'slug', 'parent_id'];
 
+    // Quan hệ với danh mục cha
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    // Quan hệ với danh mục con
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    // Quan hệ với sản phẩm
     public function products()
     {
         return $this->hasMany(Product::class);
